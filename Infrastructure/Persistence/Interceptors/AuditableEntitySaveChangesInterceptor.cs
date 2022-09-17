@@ -8,16 +8,16 @@ namespace Infrastructure.Persistence.Interceptors
 {
     public class AuditableEntitySaveChangesInterceptor : SaveChangesInterceptor
     {
-       // private readonly ICurrentUserService _currentUserService;
-       // private readonly IDateTime _dateTime;
+      //  private readonly ICurrentUserService _currentUserService;
+        private readonly IDateTime _dateTime;
 
         public AuditableEntitySaveChangesInterceptor(
          //   ICurrentUserService currentUserService,
-          //  IDateTime dateTime
+            IDateTime dateTime
           )
         {
-          //  _currentUserService = currentUserService;
-          //  _dateTime = dateTime;
+         //  _currentUserService = currentUserService;
+           _dateTime = dateTime;
         }
 
         public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
@@ -43,13 +43,13 @@ namespace Infrastructure.Persistence.Interceptors
                 if (entry.State == EntityState.Added)
                 {
                 //    entry.Entity.CreatedBy = _currentUserService.UserId;
-               //     entry.Entity.Created = _dateTime.Now;
+                    entry.Entity.Created = _dateTime.Now;
                 }
 
                 if (entry.State == EntityState.Added || entry.State == EntityState.Modified || entry.HasChangedOwnedEntities())
                 {
                   //  entry.Entity.LastModifiedBy = _currentUserService.UserId;
-              //      entry.Entity.LastModified = _dateTime.Now;
+                    entry.Entity.LastModified = _dateTime.Now;
                 }
             }
         }

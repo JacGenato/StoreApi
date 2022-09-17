@@ -23,8 +23,7 @@ namespace Application.Products.Commands.CreateOrUpdateProduct
             var entity = new Product
             {
                 Name = request.Name,
-                Description = request.Description
-          
+                Description = request.Description 
             };
 
          //   entity.AddDomainEvent(new TodoItemCreatedEvent(entity));
